@@ -2,7 +2,7 @@
   "name": "@khala/commit-analyzer-wildcard",
   "version": "0.0.1",
   "description": "Commit analyzer for semantic-release based on wildcards",
-  "main": "index.js",
+  "main": "analyze-wildcard.js",
   "private": false,
   "scripts": {
     "lint": "eslint .",
@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/karelhala/commit-analyzer-wildcard.git"
+    "url": "git@github.com:karelhala/commit-analyzer-wildcard.git"
   },
   "keywords": [
     "semantic-release",
@@ -33,7 +33,7 @@
   "release": {
     "analyzeCommits": [
       {
-        "path": "./index.js"
+        "path": "./analyzer-wildcard.js"
       }
     ]
   }

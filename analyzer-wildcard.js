@@ -6,7 +6,7 @@ let patterns = {
   noRelease: '<no>',
 };
 
-async function commitAnalyzer(pluginConfig, { options: { analyzeCommits }, commits, logger }) {
+async function commitAnalyzer(pluginConfig, { options: { analyzeCommits }, logger, commits }) {
   let releaseNumber = 3;
   analyzeCommits.map((onePlugin) => {
     patterns = {
