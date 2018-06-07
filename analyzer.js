@@ -15,8 +15,7 @@ async function commitAnalyzer(pluginConfig, { options: { analyzeCommits }, logge
     };
     return null;
   });
-  logger.log(`
-  Using patterns:
+  logger.log(`Using patterns:
       major - ${patterns.major}
       minor - ${patterns.minor}
       patch - ${patterns.patch}
