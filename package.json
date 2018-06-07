@@ -2,7 +2,7 @@
   "name": "@khala/commit-analyzer-wildcard",
   "version": "0.0.1",
   "description": "Commit analyzer for semantic-release based on wildcards",
-  "main": "analyze-wildcard.js",
+  "main": "analyzer.js",
   "private": false,
   "scripts": {
     "lint": "eslint .",
