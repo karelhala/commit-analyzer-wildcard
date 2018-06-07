@@ -20,14 +20,14 @@ Then add it to your `release` options
 ```JSON
 {
   "release": {
-    "analyzeCommits": "@khala/commit-analyzer-wildcard"
+    "analyzeCommits": "@khala/commit-analyzer-wildcard/analyzer"
   }
 }
 ```
 * `.releaserc`
 ```JSON
 {
-  "analyzeCommits": "@khala/commit-analyzer-wildcard"  
+  "analyzeCommits": "@khala/commit-analyzer-wildcard/analyzer"  
 }
 ```
 ## Options
@@ -38,7 +38,7 @@ To change default patterns you can pass your own in your release option.
   "release": {
     "analyzeCommits": [
       {
-        "path": "@khala/commit-analyzer-wildcard",
+        "path": "@khala/commit-analyzer-wildcard/analyzer",
         "patterns": {
           "major": "<x.[x|?].[x|?]>",
           "minor": "<?.x.[x|?]>",

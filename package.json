@@ -33,7 +33,7 @@
   "release": {
     "analyzeCommits": [
       {
-        "path": "./analyzer-wildcard.js"
+        "path": "./analyzer.js"
       }
     ]
   }
