@@ -34,7 +34,7 @@ Then add it to your `release` options
 
 To change default patterns you can pass your own in your release option.
 ```JSON
-{
+{r
   "release": {
     "analyzeCommits": [
       {

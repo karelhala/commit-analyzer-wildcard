@@ -30,7 +30,7 @@ async function commitAnalyzer(pluginConfig, { options: { analyzeCommits }, logge
     } else if (commits[i].message.search(new RegExp(patterns.patch), 'i') !== -1 && releaseNumber > 2) {
       releaseNumber = 2;
     } else if (commits[i].message.search(new RegExp(patterns.noRelease), 'i') !== -1 && releaseNumber > 2) {
-      logger.log('No release !');
+      logger.log('No release!');
       return null;
     }
   }
