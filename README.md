@@ -30,6 +30,29 @@ Then add it to your `release` options
   "analyzeCommits": "@khala/commit-analyzer-wildcard/analyzer"  
 }
 ```
+
+## Default usage
+Simply add some special characters to any of your commit messages and new release will be triggered
+* Major - `<?.?.x>`
+* Minor - `<?.x.x>` or `<?.x.?>`
+* Bug - `<x.x.x>` or `<x.x.?>` or `<x.?.x>` or `<x.?.?>`
+* No release - `<no>`
+
+To trigger automatic release add this to `package.json` and install [semantic-release](https://www.npmjs.com/package/semantic-release)
+```JSON
+{
+  "scripts": {
+    "release": "semantic-release"
+  }
+}
+```
+
+Settings for travis is
+```YML
+after_success:
+- npm run release
+```
+
 ## Options
 
 To change default patterns you can pass your own in your release option.
