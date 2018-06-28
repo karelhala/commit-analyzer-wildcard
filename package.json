@@ -45,7 +45,7 @@
         "assets": [
           "package.json"
         ],
-        "message": "Release of new version: ${nextRelease.version} <no>"
+        "message": "Release of new version: ${nextRelease.version} <no> [skip ci]"
       }
     ]
   }
