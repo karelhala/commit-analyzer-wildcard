@@ -25,6 +25,8 @@
   },
   "homepage": "https://github.com/karelhala/commit-analyzer-wildcard#readme",
   "devDependencies": {
+    "@semantic-release/git": "^6.0.1",
+    "@semantic-release/npm": "^3.3.4",
     "eslint": "^4.19.1",
     "eslint-config-airbnb-base": "^12.1.0",
     "eslint-plugin-import": "^2.12.0",
@@ -40,7 +42,9 @@
       "@semantic-release/npm",
       {
         "path": "@semantic-release/git",
-        "assets": ["package.json"],
+        "assets": [
+          "package.json"
+        ],
         "message": "Release of new version: ${nextRelease.version}"
       }
     ]
