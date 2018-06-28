@@ -35,6 +35,14 @@
       {
         "path": "./analyzer.js"
       }
+    ],
+    "prepare": [
+      "@semantic-release/npm",
+      {
+        "path": "@semantic-release/git",
+        "assets": ["package.json"],
+        "message": "Release of new version: ${nextRelease.version}"
+      }
     ]
   }
 }
