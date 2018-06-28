@@ -19,10 +19,10 @@ async function commitAnalyzer(pluginConfig, { options: { analyzeCommits }, logge
   }
 
   logger.log(`Using patterns:
-      major - ${patterns.major}
-      minor - ${patterns.minor}
-      patch - ${patterns.patch}
-      noRelease - ${patterns.noRelease}`);
+    *  major - ${patterns.major}
+    *  minor - ${patterns.minor}
+    *  patch - ${patterns.patch}
+    *  noRelease - ${patterns.noRelease}`);
   let i = 0; const iMax = commits.length;
   for (; i < iMax; i++) {
     if (commits[i].message.search(new RegExp(patterns.major), 'i') !== -1) {
