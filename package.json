@@ -1,6 +1,6 @@
 {
   "name": "@khala/commit-analyzer-wildcard",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Commit analyzer for semantic-release based on wildcards",
   "main": "analyzer.js",
   "private": false,
