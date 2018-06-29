@@ -33,9 +33,9 @@ Then add it to your `release` options
 
 ## Default usage
 Simply add some special characters to any of your commit messages and new release will be triggered
-* Major - `<?.?.x>`
+* Major - `<x.x.x>` or `<x.x.?>` or `<x.?.x>` or `<x.?.?>`
 * Minor - `<?.x.x>` or `<?.x.?>`
-* Bug - `<x.x.x>` or `<x.x.?>` or `<x.?.x>` or `<x.?.?>`
+* Bug - `<?.?.x>`
 * No release - `<no>`
 
 To trigger automatic release add this to `package.json` and install [semantic-release](https://www.npmjs.com/package/semantic-release)
