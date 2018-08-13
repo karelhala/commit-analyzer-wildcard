@@ -9,7 +9,7 @@ let patterns = {
 async function commitAnalyzer(pluginConfig, { options: { analyzeCommits }, logger, commits }) {
   let releaseNumber = 3;
   const analyzers = analyzeCommits instanceof Array ? analyzeCommits : [analyzeCommits];
-  patterns = analyzers.map((onePlugin) => {
+  analyzers.map((onePlugin) => {
     patterns = {
       ...patterns,
       ...onePlugin.patterns,
