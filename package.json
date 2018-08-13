@@ -6,7 +6,7 @@
   "private": false,
   "scripts": {
     "lint": "eslint .",
-    "release": "semantic-release",
+    "release": "semantic-release -d --no-ci --debug --verify-conditions",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -30,14 +30,13 @@
     "eslint": "^4.19.1",
     "eslint-config-airbnb-base": "^12.1.0",
     "eslint-plugin-import": "^2.12.0",
-    "semantic-release": "^15.5.1"
+    "semantic-release": "^15.6.0"
   },
   "release": {
-    "analyzeCommits": [
-      {
-        "path": "./analyzer.js"
-      }
-    ],
+    "analyzeCommits":
+    {
+      "path": "./analyzer.js"
+    },
     "prepare": [
       "@semantic-release/npm",
       {

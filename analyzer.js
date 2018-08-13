@@ -8,15 +8,14 @@ let patterns = {
 
 async function commitAnalyzer(pluginConfig, { options: { analyzeCommits }, logger, commits }) {
   let releaseNumber = 3;
-  if (analyzeCommits instanceof Array) {
-    analyzeCommits.map((onePlugin) => {
-      patterns = {
-        ...patterns,
-        ...onePlugin.patterns,
-      };
-      return null;
-    });
-  }
+  const analyzers = analyzeCommits instanceof Array ? analyzeCommits : [analyzeCommits];
+  patterns = analyzers.map((onePlugin) => {
+    patterns = {
+      ...patterns,
+      ...onePlugin.patterns,
+    };
+    return null;
+  });
 
   logger.log(`Using patterns:
     *  major - ${patterns.major}
