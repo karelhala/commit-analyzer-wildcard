@@ -8,9 +8,9 @@ notifications:
 node_js:
 - '8'
 script:
-- yarn lint
+- npm run lint
 after_success:
-- yarn release
+- npm run release
 branches:
   except:
     - /^v\d+\.\d+\.\d+$/
