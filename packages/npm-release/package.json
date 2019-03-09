@@ -1,0 +1,38 @@
+{
+  "name": "@khala/npm-release-monorepo",
+  "version": "1.1.0",
+  "description": "Commit analyzer for semantic-release based on wildcards monorepos",
+  "main": "analyzer.js",
+  "private": false,
+  "scripts": {
+    "lint": "eslint .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:karelhala/commit-analyzer-wildcard.git"
+  },
+  "keywords": [
+    "semantic-release",
+    "commit-analyzer",
+    "wildcard"
+  ],
+  "author": "Karel Hala",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/karelhala/commit-analyzer-wildcard/issues"
+  },
+  "homepage": "https://github.com/karelhala/commit-analyzer-wildcard#readme",
+  "devDependencies": {
+    "@semantic-release/git": "^7.0.8",
+    "@semantic-release/npm": "^5.1.4",
+    "eslint": "^5.15.1",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.12.0",
+    "semantic-release": "^15.6.0"
+  },
+  "dependencies": {
+    "recursive-readdir": "^2.2.2",
+    "@semantic-release/npm": "^5.1.4"
+  }
+}
