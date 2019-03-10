@@ -12,7 +12,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:karelhala/commit-analyzer-wildcard.git"
+    "url": "https://github.com/karelhala/commit-analyzer-wildcard.git"
   },
   "keywords": [
     "semantic-release",
