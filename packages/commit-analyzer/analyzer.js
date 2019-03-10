@@ -21,7 +21,6 @@ function releaseType(commit, patterns, releaseNumber = 3) {
 }
 
 async function commitAnalyzer({ patterns: pluginPatterns }, { options: { analyzeCommits }, logger, commits }) {
-  logger.log(pluginPatterns);
   let releaseNumber = 3;
   patterns = {
     ...patterns,
@@ -48,5 +47,6 @@ async function commitAnalyzer({ patterns: pluginPatterns }, { options: { analyze
 }
 
 commitAnalyzer.releaseType = releaseType;
+commitAnalyzer.patterns = patterns;
 
 module.exports = commitAnalyzer;
