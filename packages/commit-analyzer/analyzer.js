@@ -6,32 +6,39 @@ let patterns = {
   noRelease: '<no>',
 };
 
-async function commitAnalyzer(pluginConfig, { options: { analyzeCommits }, logger, commits }) {
-  let releaseNumber = 3;
-  const analyzers = analyzeCommits instanceof Array ? analyzeCommits : [analyzeCommits];
-  analyzers.map((onePlugin) => {
-    patterns = {
-      ...patterns,
-      ...onePlugin.patterns,
-    };
+function releaseType(commit, patterns, releaseNumber = 3) {
+  if (commit.message.search(new RegExp(patterns.major), 'i') !== -1) {
+    return 0;
+  } else if (commit.message.search(new RegExp(patterns.minor), 'i') !== -1 && releaseNumber > 1) {
+    return 1;
+  } else if (commit.message.search(new RegExp(patterns.patch), 'i') !== -1 && releaseNumber > 2) {
+    return 2;
+  } else if (commit.message.search(new RegExp(patterns.noRelease), 'i') !== -1 && releaseNumber > 2) {
     return null;
-  });
+  } else {
+    return 2;
+  }
+}
+
+async function commitAnalyzer({ patterns: pluginPatterns }, { options: { analyzeCommits }, logger, commits }) {
+  logger.log(pluginPatterns);
+  let releaseNumber = 3;
+  patterns = {
+    ...patterns,
+    ...pluginPatterns
+  };
 
   logger.log(`Using patterns:
     *  major - ${patterns.major}
     *  minor - ${patterns.minor}
     *  patch - ${patterns.patch}
     *  noRelease - ${patterns.noRelease}`);
+  logger.log(`Full patterns
+  * ${ Object.keys(patterns).map(key => `${key} - ${patterns[key]}`).join('\n * ') }`);
   let i = 0; const iMax = commits.length;
   for (; i < iMax; i++) {
-    if (commits[i].message.search(new RegExp(patterns.major), 'i') !== -1) {
-      releaseNumber = 0;
-    } else if (commits[i].message.search(new RegExp(patterns.minor), 'i') !== -1 && releaseNumber > 1) {
-      releaseNumber = 1;
-    } else if (commits[i].message.search(new RegExp(patterns.patch), 'i') !== -1 && releaseNumber > 2) {
-      releaseNumber = 2;
-    } else if (commits[i].message.search(new RegExp(patterns.noRelease), 'i') !== -1 && releaseNumber > 2) {
-      logger.log('No release!');
+    releaseNumber = releaseType(commits[i], patterns, releaseNumber);
+    if (releaseNumber === null) {
       return null;
     }
   }
@@ -39,5 +46,7 @@ async function commitAnalyzer(pluginConfig, { options: { analyzeCommits }, logge
   logger.log('Release version %s', releaseTypes[releaseNumber]);
   return releaseTypes[releaseNumber];
 }
+
+commitAnalyzer.releaseType = releaseType;
 
 module.exports = commitAnalyzer;
