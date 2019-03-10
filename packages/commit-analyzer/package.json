@@ -1,9 +1,9 @@
 {
-  "name": "@khala/commit-analyzer-root",
+  "name": "@khala/commit-analyzer-wildcard",
   "version": "1.1.0",
   "description": "Commit analyzer for semantic-release based on wildcards",
   "main": "analyzer.js",
-  "private": true,
+  "private": false,
   "scripts": {
     "lint": "eslint .",
     "release": "semantic-release --debug --verify-conditions",
@@ -36,7 +36,7 @@
   },
   "release": {
     "analyzeCommits": {
-      "path": "./packages/commit-analyzer/analyzer.js"
+      "path": "./analyzer.js"
     },
     "prepare": [
       {
