@@ -18,14 +18,14 @@ async function verifyConditions(pluginConfig, context) {
 }
 
 async function prepare(pluginConfig, context) {
-  const packages = await findPackages(pluginConfig.folder, context);
+  const packages = await findPackages(pluginConfig.folder || pluginConfig.monorepo, context);
   context.logger.log(`Preparing packages:
   * ${packages.join('\n * ')}`);
   packages.map(async pkgRoot => npmReleaser.prepare({ ...pluginConfig, pkgRoot }, context));
 }
 
 async function publish(pluginConfig, context) {
-  const packages = await findPackages(pluginConfig.folder, context);
+  const packages = await findPackages(pluginConfig.folder || pluginConfig.monorepo, context);
   context.logger.log(`Publishing packages:
   * ${packages.join('\n * ')}`);
   return packages.reduce(async (acc, pkgRoot) => {
