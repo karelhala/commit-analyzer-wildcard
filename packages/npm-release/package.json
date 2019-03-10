@@ -24,12 +24,9 @@
   },
   "homepage": "https://github.com/karelhala/commit-analyzer-wildcard#readme",
   "devDependencies": {
-    "@semantic-release/git": "^7.0.8",
-    "@semantic-release/npm": "^5.1.4",
     "eslint": "^5.15.1",
     "eslint-config-airbnb-base": "^13.1.0",
-    "eslint-plugin-import": "^2.12.0",
-    "semantic-release": "^15.6.0"
+    "eslint-plugin-import": "^2.12.0"
   },
   "dependencies": {
     "recursive-readdir": "^2.2.2",
