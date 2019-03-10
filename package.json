@@ -1,12 +1,13 @@
 {
   "name": "@khala/commit-analyzer-wildcard",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description": "Commit analyzer for semantic-release based on wildcards",
   "main": "analyzer.js",
   "private": false,
   "scripts": {
     "lint": "eslint .",
-    "release": "semantic-release -d --no-ci --debug --verify-conditions",
+    "release": "semantic-release --debug --verify-conditions",
+    "dry-release": "semantic-release --dry-run --no-ci --debug --verify-conditions",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -25,26 +26,35 @@
   },
   "homepage": "https://github.com/karelhala/commit-analyzer-wildcard#readme",
   "devDependencies": {
-    "@semantic-release/git": "^6.0.1",
-    "@semantic-release/npm": "^3.3.4",
-    "eslint": "^4.19.1",
-    "eslint-config-airbnb-base": "^12.1.0",
+    "@semantic-release/git": "^7.0.8",
+    "eslint": "^5.15.1",
+    "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.12.0",
-    "semantic-release": "^15.6.0"
+    "semantic-release": "^15.6.0",
+    "recursive-readdir": "^2.2.2",
+    "@semantic-release/npm": "^5.1.4"
   },
   "release": {
-    "analyzeCommits":
-    {
+    "analyzeCommits": {
       "path": "./analyzer.js"
     },
     "prepare": [
-      "@semantic-release/npm",
+      {
+        "path": "./packages/npm-release/analyzer.js",
+        "folder": "."
+      },
       {
         "path": "@semantic-release/git",
         "assets": [
           "package.json"
         ],
         "message": "Release of new version: ${nextRelease.version} <no> [skip ci]"
+      }
+    ],
+    "publish": [
+      {
+        "path": "./packages/npm-release/analyzer.js",
+        "folder": "."
       }
     ]
   }
