@@ -1,14 +1,14 @@
 const { patterns, releaseType } = require('@khala/commit-analyzer-wildcard');
 
-const { join, resolve } = require('path');
+const { join } = require('path');
 const recursive = require('recursive-readdir');
 const execa = require('execa');
 
 const commiMapper = [
   'majorChanges',
   'minorChanges',
-  'bugFixes'
-]
+  'bugFixes',
+];
 
 async function findPackages(folder) {
   const files = await recursive(folder, ['node_modules', '.git']);
@@ -19,7 +19,7 @@ async function findPackages(folder) {
       packageArr.splice(-1);
       return packageArr.join('/');
     });
-};
+}
 
 function getCurrDate() {
   const now = new Date();
@@ -32,35 +32,36 @@ async function groupMessages(allPackages, { hash, message }) {
     const pckg = allPackages.find(onePckg => file.indexOf(onePckg) !== -1);
     return {
       ...affectted,
-      ...pckg ? { [pckg]: message } : {}
-    }
+      ...pckg ? { [pckg]: message } : {},
+    };
   }, {});
 }
 
 async function generateChanges(allPackages, commits, collectedPatterns) {
-  return await commits.reduce(async (acc, curr) => {
+  return commits.reduce(async (acc, curr) => {
     const commitsPromise = await acc;
     const commitType = commiMapper[releaseType(curr, collectedPatterns)];
     if (!commitType) {
       return commitsPromise;
     }
     const groupped = await groupMessages(allPackages, curr);
-    Object.keys(groupped).forEach(pckg => {
+    Object.keys(groupped).forEach((pckg) => {
       commitsPromise[commitType][pckg] = [
         ...commitsPromise[commitType][pckg] ? commitsPromise[commitType][pckg] : [],
-        groupped[pckg]
-      ]
+        groupped[pckg],
+      ];
     });
     return commitsPromise;
   }, { bugFixes: {}, minorChanges: {}, majorChanges: {} });
 }
 
-async function pckgName(pckgName, folder) {
-  return (await require(join(folder, pckgName, 'package.json'))).name;
+async function pckgName(pckgFile, folder) {
+  // eslint-disable-next-line global-require
+  return (await require(join(folder, pckgFile, 'package.json'))).name; // eslint-disable-line import/no-dynamic-require
 }
 
 async function generateMessage(changes, folder, version) {
-  const routes = await Object.keys(changes).map(async key => {
+  const routes = await Object.keys(changes).map(async (key) => {
     const pckg = await pckgName(key, folder);
     return `\n### [${pckg}~${version}](https://www.npmjs.com/package/${pckg}/v/${version}) \n * ${changes[key].join('\n * ')}`;
   });
@@ -68,20 +69,27 @@ async function generateMessage(changes, folder, version) {
 }
 
 async function generateNotes(
-  { patterns: pluginPatterns, folder, monorepo, },
-  { logger, commits, nextRelease: { version: nextVersion, gitTag: nextTag }, lastRelease: { gitTag: lastTag }, cwd, env }
+  { patterns: pluginPatterns, folder, monorepo },
+  {
+    logger,
+    commits,
+    nextRelease: { version: nextVersion, gitTag: nextTag },
+    lastRelease: { gitTag: lastTag },
+    cwd,
+    env,
+  },
 ) {
-  const root = join(cwd, folder || monorepo || '.')
+  const root = join(cwd, folder || monorepo || '.');
   const allPackages = (await findPackages(root)).map(
-    onePckg => onePckg.substring(root.length)
+    onePckg => onePckg.substring(root.length),
   );
   const { bugFixes, minorChanges, majorChanges } = await generateChanges(
     allPackages,
     commits,
     {
       ...patterns,
-      ...pluginPatterns
-    }
+      ...pluginPatterns,
+    },
   );
   logger.log(`
   Bug fixes: ${Object.keys(bugFixes).map(key => `${key} - ${bugFixes[key]}`)}
@@ -95,9 +103,9 @@ async function generateNotes(
   const majorChangesTemplate = await generateMessage(majorChanges, root, nextVersion);
   const minorChangesTemplate = await generateMessage(minorChanges, root, nextVersion);
   const bugFixesTemplate = await generateMessage(bugFixes, root, nextVersion);
-  template = `
+  const template = `
 # [${nextVersion}](https://github.com/${env.TRAVIS_REPO_SLUG}/compare/${lastTag}...${nextTag}) (${getCurrDate()})
-${Object.keys(majorChanges).length !== 0 ? `## Major changes\n${majorChangesTemplate}\n`: ''}
+${Object.keys(majorChanges).length !== 0 ? `## Major changes\n${majorChangesTemplate}\n` : ''}
 ${Object.keys(minorChanges).length !== 0 ? `## Minor changes\n${minorChangesTemplate}\n` : ''}
 ${Object.keys(bugFixes).length !== 0 ? `## Bug fixes\n${bugFixesTemplate}\n` : ''}
   `;
