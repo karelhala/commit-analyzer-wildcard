@@ -8,7 +8,17 @@
     "lint": "eslint .",
     "release": "semantic-release --debug --verify-conditions --no-ci",
     "dry-release": "semantic-release --dry-run --no-ci --debug --verify-conditions --branch `git rev-parse --abbrev-ref HEAD`",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
+  },
+  "jest": {
+    "coverageDirectory": "./coverage/",
+    "collectCoverage": true,
+    "collectCoverageFrom": [
+      "packages/**/*.js"
+    ],
+    "roots": [
+      "<rootDir>/packages/"
+    ]
   },
   "repository": {
     "type": "git",
@@ -34,6 +44,7 @@
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.12.0",
     "execa": "^1.0.0",
+    "jest": "^24.3.1",
     "recursive-readdir": "^2.2.2",
     "semantic-release": "^15.13.3"
   },

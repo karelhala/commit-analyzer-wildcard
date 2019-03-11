@@ -3,7 +3,7 @@ const {
   findPackages,
   getCurrDate,
   generateChanges,
-  generateMessage
+  generateMessage,
 } = require('./lib');
 
 const patterns = {
