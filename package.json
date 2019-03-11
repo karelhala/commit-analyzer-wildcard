@@ -26,36 +26,25 @@
   },
   "homepage": "https://github.com/karelhala/commit-analyzer-wildcard#readme",
   "devDependencies": {
+    "@khala/commit-analyzer-wildcard": "^2.0.0",
     "@semantic-release/git": "^7.0.8",
+    "@semantic-release/npm": "^5.1.4",
     "eslint": "^5.15.1",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.12.0",
-    "semantic-release": "^15.6.0",
+    "execa": "^1.0.0",
+    "nodegit": "^0.24.1",
     "recursive-readdir": "^2.2.2",
-    "@semantic-release/npm": "^5.1.4"
+    "semantic-release": "^15.6.0"
   },
   "release": {
-    "analyzeCommits": {
-      "path": "./packages/commit-analyzer/analyzer.js"
-    },
-    "prepare": [
-      {
-        "path": "./packages/npm-release/analyzer.js",
-        "folder": "."
-      },
-      {
-        "path": "@semantic-release/git",
-        "assets": [
-          "package.json"
-        ],
-        "message": "Release of new version: ${nextRelease.version} <no> [skip ci]"
-      }
-    ],
-    "publish": [
-      {
-        "path": "./packages/npm-release/analyzer.js",
-        "folder": "."
-      }
-    ]
+    "monorepo": "./packages",
+    "analyzeCommits": "./packages/commit-analyzer/analyzer.js",
+    "generateNotes": "./packages/release-notes/analyzer.js",
+    "prepare": "./packages/npm-release/analyzer.js",
+    "publish": "./packages/npm-release/analyzer.js"
+  },
+  "dependencies": {
+    "git-diff-tree": "^1.0.0"
   }
 }
