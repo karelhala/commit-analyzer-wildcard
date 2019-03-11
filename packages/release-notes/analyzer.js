@@ -139,4 +139,4 @@ ${Object.keys(bugFixes).length !== 0 ? `## Bug fixes\n${bugFixesTemplate}\n` : '
   return template;
 }
 
-module.exports = generateNotes;
+module.exports = { generateNotes };
