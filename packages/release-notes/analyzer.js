@@ -136,6 +136,7 @@ ${Object.keys(majorChanges).length !== 0 ? `## Major changes\n${majorChangesTemp
 ${Object.keys(minorChanges).length !== 0 ? `## Minor changes\n${minorChangesTemplate}\n` : ''}
 ${Object.keys(bugFixes).length !== 0 ? `## Bug fixes\n${bugFixesTemplate}\n` : ''}
   `;
+  logger.log(template);
   return template;
 }
 

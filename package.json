@@ -43,6 +43,8 @@
       "./packages/release-notes/analyzer.js",
       "./packages/npm-release/analyzer.js",
       "./packages/npm-release/analyzer.js"
-    ]
+    ],
+    "prepare": "./packages/npm-release/analyzer.js",
+    "publish": "./packages/npm-release/analyzer.js"
   }
 }
