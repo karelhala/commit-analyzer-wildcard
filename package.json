@@ -7,7 +7,7 @@
   "scripts": {
     "lint": "eslint .",
     "release": "semantic-release --debug --verify-conditions",
-    "dry-release": "semantic-release --dry-run --no-ci --debug --verify-conditions",
+    "dry-release": "semantic-release --dry-run --no-ci --debug --verify-conditions --branch `git rev-parse --abbrev-ref HEAD`",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
