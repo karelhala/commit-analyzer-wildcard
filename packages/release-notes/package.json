@@ -10,6 +10,12 @@
     "type": "git",
     "url": "git+ssh://git@github.com/karelhala/commit-analyzer-wildcard.git"
   },
+  "keywords": [
+    "semantic-release",
+    "release-notes",
+    "monorepo",
+    "wildcard"
+  ],
   "author": "Karel Hala",
   "license": "MIT",
   "bugs": {
