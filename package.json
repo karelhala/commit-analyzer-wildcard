@@ -43,10 +43,7 @@
       "./packages/commit-analyzer/analyzer.js",
       "./packages/release-notes/analyzer.js",
       "./packages/npm-release/analyzer.js",
-      "./packages/npm-release/analyzer.js",
       "@semantic-release/github"
-    ],
-    "prepare": "./packages/npm-release/analyzer.js",
-    "publish": "./packages/npm-release/analyzer.js"
+    ]
   }
 }
