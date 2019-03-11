@@ -88,4 +88,6 @@ async function generateMessage(changes, folder, version) {
   return (await Promise.all(routes)).join('\n');
 }
 
-module.exports = { generateMessage, releaseType, findPackages, getCurrDate, groupMessages, pckgName, generateChanges };
+module.exports = {
+  generateMessage, releaseType, findPackages, getCurrDate, groupMessages, pckgName, generateChanges,
+};
