@@ -14,8 +14,7 @@
   },
   "keywords": [
     "semantic-release",
-    "commit-analyzer",
-    "wildcard"
+    "monorepo"
   ],
   "author": "Karel Hala",
   "license": "Apache-2.0",
