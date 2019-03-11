@@ -6,7 +6,7 @@
   "private": true,
   "scripts": {
     "lint": "eslint .",
-    "release": "semantic-release --debug --verify-conditions",
+    "release": "semantic-release --debug --verify-conditions --no-ci",
     "dry-release": "semantic-release --dry-run --no-ci --debug --verify-conditions --branch `git rev-parse --abbrev-ref HEAD`",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -38,9 +38,11 @@
   },
   "release": {
     "monorepo": "./packages",
-    "analyzeCommits": "./packages/commit-analyzer/analyzer.js",
-    "generateNotes": "./packages/release-notes/analyzer.js",
-    "prepare": "./packages/npm-release/analyzer.js",
-    "publish": "./packages/npm-release/analyzer.js"
+    "plugins": [
+      "./packages/commit-analyzer/analyzer.js",
+      "./packages/release-notes/analyzer.js",
+      "./packages/npm-release/analyzer.js",
+      "./packages/npm-release/analyzer.js"
+    ]
   }
 }
