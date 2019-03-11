@@ -19,7 +19,6 @@
   "dependencies": {
     "@khala/commit-analyzer-wildcard": "^2.0.0",
     "execa": "^1.0.0",
-    "git-diff-tree": "^1.0.0",
     "recursive-readdir": "^2.2.2"
   }
 }
