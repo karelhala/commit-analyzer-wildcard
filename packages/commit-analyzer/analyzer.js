@@ -25,7 +25,7 @@ function releaseType(
   } if (commit.message.search(new RegExp(noRelease), 'i') !== -1 && releaseNumber > 2) {
     return null;
   }
-  return 2;
+  return releaseNumber;
 }
 
 async function analyzeCommits({ patterns: pluginPatterns }, { logger, commits }) {
