@@ -2,6 +2,13 @@ const { join } = require('path');
 const recursive = require('recursive-readdir');
 const execa = require('execa');
 
+const patterns = {
+  major: '<x.[x|?].[x|?]>',
+  minor: '<?.x.[x|?]>',
+  patch: '<?.?.x>',
+  noRelease: '<no>',
+};
+
 const commiMapper = [
   'majorChanges',
   'minorChanges',
@@ -9,7 +16,7 @@ const commiMapper = [
 ];
 
 function releaseType(
-  commit,
+  { message },
   {
     major,
     minor,
@@ -18,13 +25,13 @@ function releaseType(
   },
   releaseNumber = 3,
 ) {
-  if (commit.message.search(new RegExp(major), 'i') !== -1) {
+  if (message.search(new RegExp(major), 'i') !== -1) {
     return 0;
-  } if (commit.message.search(new RegExp(minor), 'i') !== -1 && releaseNumber > 1) {
+  } if (message.search(new RegExp(minor), 'i') !== -1 && releaseNumber > 1) {
     return 1;
-  } if (commit.message.search(new RegExp(patch), 'i') !== -1 && releaseNumber > 2) {
+  } if (message.search(new RegExp(patch), 'i') !== -1 && releaseNumber > 2) {
     return 2;
-  } if (commit.message.search(new RegExp(noRelease), 'i') !== -1 && releaseNumber > 2) {
+  } if (message.search(new RegExp(noRelease), 'i') !== -1 && releaseNumber > 2) {
     return null;
   }
   return 2;
@@ -89,5 +96,5 @@ async function generateMessage(changes, folder, version) {
 }
 
 module.exports = {
-  generateMessage, releaseType, findPackages, getCurrDate, groupMessages, pckgName, generateChanges,
+  generateMessage, releaseType, findPackages, getCurrDate, groupMessages, pckgName, generateChanges, patterns
 };

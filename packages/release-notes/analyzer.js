@@ -4,14 +4,8 @@ const {
   getCurrDate,
   generateChanges,
   generateMessage,
+  patterns,
 } = require('./lib');
-
-const patterns = {
-  major: '<x.[x|?].[x|?]>',
-  minor: '<?.x.[x|?]>',
-  patch: '<?.?.x>',
-  noRelease: '<no>',
-};
 
 async function generateNotes(
   { patterns: pluginPatterns, folder, monorepo },
