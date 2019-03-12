@@ -96,5 +96,12 @@ async function generateMessage(changes, folder, version) {
 }
 
 module.exports = {
-  generateMessage, releaseType, findPackages, getCurrDate, groupMessages, pckgName, generateChanges, patterns
+  generateMessage,
+  releaseType,
+  findPackages,
+  getCurrDate,
+  groupMessages,
+  pckgName,
+  generateChanges,
+  patterns,
 };
