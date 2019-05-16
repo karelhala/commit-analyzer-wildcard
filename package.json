@@ -39,14 +39,14 @@
     "@khala/commit-analyzer-wildcard": "^2.0.0",
     "@semantic-release/git": "^7.0.8",
     "@semantic-release/github": "^5.2.10",
-    "@semantic-release/npm": "^5.1.4",
+    "@semantic-release/npm": "^5.1.8",
     "eslint": "^5.15.1",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.12.0",
     "execa": "^1.0.0",
     "jest": "^24.3.1",
     "recursive-readdir": "^2.2.2",
-    "semantic-release": "^15.13.3"
+    "semantic-release": "^15.13.14"
   },
   "release": {
     "monorepo": "./packages",
