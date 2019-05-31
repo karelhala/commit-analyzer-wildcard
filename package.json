@@ -39,7 +39,7 @@
     "@khala/commit-analyzer-wildcard": "^2.0.0",
     "@semantic-release/git": "^7.0.8",
     "@semantic-release/github": "^5.2.10",
-    "@semantic-release/npm": "^5.1.8",
+    "@semantic-release/npm": "^5.1.9",
     "eslint": "^5.15.1",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.12.0",

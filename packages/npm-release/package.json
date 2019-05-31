@@ -26,10 +26,10 @@
     "eslint": "^5.15.1",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.12.0",
-    "semantic-release": "^15.6.0"
+    "semantic-release": "^15.13.14"
   },
   "dependencies": {
-    "recursive-readdir": "^2.2.2",
-    "@semantic-release/npm": "^5.1.4"
+    "@semantic-release/npm": "^5.1.9",
+    "recursive-readdir": "^2.2.2"
   }
 }
