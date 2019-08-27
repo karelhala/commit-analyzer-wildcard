@@ -2,3 +2,4 @@ node_modules/
 .code
 .vscode
 coverage
+packages/**/package-lock.json
