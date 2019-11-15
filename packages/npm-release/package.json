@@ -29,7 +29,7 @@
     "semantic-release": "^15.13.14"
   },
   "dependencies": {
-    "@semantic-release/npm": "^5.1.9",
+    "@semantic-release/npm": "^5.3.4",
     "recursive-readdir": "^2.2.2"
   }
 }
