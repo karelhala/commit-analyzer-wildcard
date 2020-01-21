@@ -50,7 +50,7 @@ async function findPackages(folder) {
 
 function getCurrDate() {
   const now = new Date();
-  return `${now.getFullYear()}-${now.getMonth() < 10 ? '0' : '0'}${now.getMonth()}-${now.getDate() < 10 ? '0' : ''}${now.getDate()}`;
+  return `${now.getFullYear()}-${(now.getMonth() + 1) < 10 ? '0' : ''}${now.getMonth() + 1}-${now.getDate() < 10 ? '0' : ''}${now.getDate()}`;
 }
 
 async function groupMessages(allPackages, { hash, message }) {
