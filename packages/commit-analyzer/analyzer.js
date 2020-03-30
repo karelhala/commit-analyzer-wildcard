@@ -49,7 +49,7 @@ async function analyzeCommits({ patterns: pluginPatterns, defaultRelease }, { lo
   const releaseNumbers = commits.map(
     (commit) => {
       const type = releaseType(commit, patterns, defaultRelease);
-      logger.log(`Analyzing commit: ${commit}
+      logger.log(`Analyzing commit: ${commit.message}
       release type: ${type === noReleaseType ? 'no release' : releaseTypes[type]}`);
 
       return type;
