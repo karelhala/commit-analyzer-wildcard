@@ -1,4 +1,5 @@
 # commit-analyzer-wildcard
+
 Wildcard commit analyzer for [semantic-release](https://github.com/semantic-release/semantic-release) to find substrings in each commit message.
 
 [![Travis](https://img.shields.io/travis/karelhala/commit-analyzer-wildcard.svg)](https://travis-ci.org/karelhala/commit-analyzer-wildcard)
