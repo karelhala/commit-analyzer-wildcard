@@ -1,10 +1,11 @@
-const releaseTypes = ['major', 'minor', 'patch', 'prerelease'];
+const releaseTypes = ['major', 'minor', 'patch'];
 let patterns = {
   major: '<x.[x|?].[x|?]>',
   minor: '<?.x.[x|?]>',
   patch: '<?.?.x>',
   noRelease: '<no>',
 };
+const noReleaseType = 99;
 
 function releaseType(
   commit,
@@ -14,22 +15,24 @@ function releaseType(
     patch,
     noRelease,
   },
-  releaseNumber = 3,
+  defaultRelease = 'patch',
 ) {
   if (commit.message.search(new RegExp(major), 'i') !== -1) {
     return 0;
-  } if (commit.message.search(new RegExp(minor), 'i') !== -1 && releaseNumber > 1) {
+  } if (commit.message.search(new RegExp(minor), 'i') !== -1) {
     return 1;
-  } if (commit.message.search(new RegExp(patch), 'i') !== -1 && releaseNumber > 2) {
+  } if (commit.message.search(new RegExp(patch), 'i') !== -1) {
     return 2;
-  } if (commit.message.search(new RegExp(noRelease), 'i') !== -1 && releaseNumber > 2) {
-    return null;
+  } if (
+    commit.message.search(new RegExp(noRelease), 'i') !== -1 || !releaseTypes.includes(defaultRelease)
+  ) {
+    return noReleaseType;
   }
-  return releaseNumber;
+
+  return releaseTypes.indexOf(defaultRelease);
 }
 
-async function analyzeCommits({ patterns: pluginPatterns }, { logger, commits }) {
-  let releaseNumber = 3;
+async function analyzeCommits({ patterns: pluginPatterns, defaultRelease }, { logger, commits }) {
   patterns = {
     ...patterns,
     ...pluginPatterns,
@@ -42,14 +45,25 @@ async function analyzeCommits({ patterns: pluginPatterns }, { logger, commits })
     *  noRelease - ${patterns.noRelease}`);
   logger.log(`Full patterns
   * ${Object.keys(patterns).map(key => `${key} - ${patterns[key]}`).join('\n * ')}`);
-  let i = 0; const iMax = commits.length;
-  for (; i < iMax; i++) {
-    releaseNumber = releaseType(commits[i], patterns, releaseNumber);
-    if (releaseNumber === null) {
-      return null;
-    }
+
+  const releaseNumbers = commits.map(
+    (commit) => {
+      const type = releaseType(commit, patterns, defaultRelease);
+      logger.log(`Analyzing commit: ${commit}
+      release type: ${type === noReleaseType ? 'no release' : releaseTypes[type]}`);
+
+      return type;
+    },
+  );
+
+  const releaseNumber = Math.min(...releaseNumbers);
+
+  if (releaseNumber === noReleaseType) {
+    logger.log('No release');
+
+    return null;
   }
-  releaseNumber = releaseNumber === 3 ? 2 : releaseNumber;
+
   logger.log('Release version %s', releaseTypes[releaseNumber]);
   return releaseTypes[releaseNumber];
 }
