@@ -49,3 +49,21 @@ This package will assume that you want to generate release notes for packages un
   }
 }
 ```
+
+If you are not using Travis as your CI environment, you can specify the repository name (GitHub) manually:
+
+```JSON
+{
+  "release": {
+    "generateNotes": [
+      {
+        "path": "@khala/wildcard-release-notes",
+        "folder": "./plugins",
+        "repositoryName": "organisation/repository"
+      }
+    ]
+  }
+}
+```
+
+Otherwise `env.TRAVIS_REPO_SLUG` is used automatically.

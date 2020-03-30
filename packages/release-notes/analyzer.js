@@ -8,7 +8,9 @@ const {
 } = require('./lib');
 
 async function generateNotes(
-  { patterns: pluginPatterns, folder, monorepo },
+  {
+    patterns: pluginPatterns, folder, monorepo, repositoryName,
+  },
   {
     logger,
     commits,
@@ -43,7 +45,7 @@ async function generateNotes(
   const minorChangesTemplate = await generateMessage(minorChanges, root, nextVersion);
   const bugFixesTemplate = await generateMessage(bugFixes, root, nextVersion);
   const template = `
-# [${nextVersion}](https://github.com/${env.TRAVIS_REPO_SLUG}/compare/${lastTag}...${nextTag}) (${getCurrDate()})
+# [${nextVersion}](https://github.com/${repositoryName || env.TRAVIS_REPO_SLUG}/compare/${lastTag}...${nextTag}) (${getCurrDate()})
 ${Object.keys(majorChanges).length !== 0 ? `## Major changes\n${majorChangesTemplate}\n` : ''}
 ${Object.keys(minorChanges).length !== 0 ? `## Minor changes\n${minorChangesTemplate}\n` : ''}
 ${Object.keys(bugFixes).length !== 0 ? `## Bug fixes\n${bugFixesTemplate}\n` : ''}
