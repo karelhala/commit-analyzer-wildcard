@@ -55,6 +55,8 @@ after_success:
 
 ## Options
 
+### Patterns
+
 To change default patterns you can pass your own in your release option.
 ```JSON
 {
@@ -75,3 +77,41 @@ To change default patterns you can pass your own in your release option.
 ```
 
 Each pattern is transfered into Regular Expression and searched in each commit message.
+
+### defaultRelease
+
+Can be set to one of:
+
+```jsx
+['major', 'minor', 'patch'];
+```
+
+DefaultRelease is set to `patch`.
+
+```JSON
+{
+  "release": {
+    "analyzeCommits": [
+      {
+        "path": "@khala/commit-analyzer-wildcard/analyzer",
+        "defaultRelease": "major"
+      }
+    ]
+  }
+}
+```
+
+You can turn the releasing off by setting a value not included in the array:
+
+```JSON
+{
+  "release": {
+    "analyzeCommits": [
+      {
+        "path": "@khala/commit-analyzer-wildcard/analyzer",
+        "defaultRelease": "noRelease"
+      }
+    ]
+  }
+}
+```
