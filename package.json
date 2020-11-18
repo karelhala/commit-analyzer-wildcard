@@ -46,7 +46,7 @@
     "execa": "^1.0.0",
     "jest": "^24.3.1",
     "recursive-readdir": "^2.2.2",
-    "semantic-release": "^15.13.30"
+    "semantic-release": "^17.2.3"
   },
   "release": {
     "monorepo": "./packages",
