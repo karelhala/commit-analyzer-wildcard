@@ -1,6 +1,7 @@
 const npmReleaser = require('@semantic-release/npm');
 const { join } = require('path');
 const recursive = require('recursive-readdir');
+const fs = require('fs');
 
 async function findPackages(folder = '.', context) {
   const files = await recursive(join(context.cwd, folder), ['node_modules', '.git']);
@@ -10,6 +11,12 @@ async function findPackages(folder = '.', context) {
       const packageArr = file.split('/');
       packageArr.splice(-1);
       return packageArr.join('/');
+    })
+    .filter((file) => {
+      const raw = fs.readFileSync(`${file}/package.json`);
+      const packageJson = JSON.parse(raw);
+
+      return packageJson.name;
     });
 }
 
